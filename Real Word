@@ -1,0 +1,2 @@
+#!/bin/bash
+ss-local -s 172.98.72.104 -p 12237 -l 6000 -k test78 -m rc4-md5

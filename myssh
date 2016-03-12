@@ -1,0 +1,7 @@
+#!/bin/bash 
+echo -n "[*]Host:"
+read host
+echo -n "[*]Username:"
+read username
+echo "[*]Now connecting..."
+ssh $username@$host

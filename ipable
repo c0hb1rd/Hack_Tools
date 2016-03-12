@@ -1,0 +1,6 @@
+#!/bin/bash
+echo -n "[*] Input the range(xx.xx.nn.xx):"
+read range
+echo "[*] Now waitng..."
+nmap -sn 192.168.60.1-254 | grep -o --color=always "192\..*\..*\..*"
+echo -e "[*] The end."
