@@ -1,2 +1,0 @@
-#!/bin/bash
-mysql -h121.42.32.213 -uroot -p417811... -Dmyspace -e"select name from useduser group by name"
