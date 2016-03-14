@@ -6,10 +6,14 @@ import sys
 
 
 result = ''
+def version():
+    return 'version 0.0.1'
+
 def help():
     print 'Description: Xsstoascii is a tool which can transcoding native encode to ASCII encode.'
-    print 'Usag: xsstoascii [-cx|v] \'source_string\''
+    print 'Usag: xsstoascii [OPTION] \'source_string\''
     print ''
+    print 'option:'
     print ' -x                            - Transcoding by hexadecimal ASCII'
     print ' -c                            - Use ";" as a delimiter.'
     print ' -cx                           - Transcoding by hexadecimal ASCII'
@@ -27,7 +31,7 @@ if len(sys.argv) > 1:
         if sys.argv[1] ==  '--help':
             help()
         elif sys.argv[1] == '-v':
-            print 'Version 0.0.1',
+            print version(),
         elif sys.argv[1][0] != '-':
             for char in sys.argv[1]:
                 result += '&#' + str(ord(char))

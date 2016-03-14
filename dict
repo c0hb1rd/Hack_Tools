@@ -1,0 +1,93 @@
+#!/usr/bin/env python
+# coding=utf-8
+import urllib, urllib2, json, sys
+
+
+reload(sys)
+sys.setdefaultencoding('utf-8')
+
+
+def version():
+    return 'version 0.0.1'
+
+def help():
+        print 'Description: dict is a translate tool.'
+        print 'Usag: dict [OPTION] \'source_string\''
+        print ''
+        print 'option:'
+        print ' -s                            - Save result to files which name of offlineDict.txt'
+        print ''
+        print ' -v                            - Print current version.'
+        print ' -h, --help                    - Print this help information.'
+
+def usag():
+    print 'dict: missing arguments'
+    print 'Try "dict --help" for more information',
+
+src = ''
+fp = 0
+if len(sys.argv) > 1:
+    if sys.argv[1] == '-h' or sys.argv[1] == '--help':
+        help()
+        exit()
+    elif sys.argv[1] == '-s':
+        for value in sys.argv[2:]:
+            fp = open("offlineDict.txt", 'at')
+            src += value + ' '
+    elif sys.argv[1][0] == '-':
+        usag()
+        exit()
+    else:
+        for value in sys.argv[1:]:
+            src += value + ' '
+else:
+    src = str(raw_input('[*]What you wanna translate: '))
+
+if not src:
+    usag()
+    exit()
+
+url = 'http://fanyi.youdao.com/translate?smartresult=dict&smartresult=rule&smartresult=ugc&sessionFrom=dict.top'
+
+values = {
+    'type':'AUTO',
+    'i':src,
+    'doctype':'json',
+    'xmlVersion':'1.8',
+    'keyfrom':'fanyi.web',
+    'ue':'UTF-8',
+    'action':'FY_BY_CLICKBUTTON',
+    'typeResult':'true'
+}
+
+data = urllib.urlencode(values)
+request = urllib2.Request(url, data)
+response = urllib2.urlopen(request)
+
+result =  response.read()
+result = result.lstrip()
+
+defaultResult = json.loads(result)['translateResult'][0][0]
+smartResult = json.loads(result)['smartResult']['entries']
+src = defaultResult['src']
+tgt = defaultResult['tgt']
+
+ls = []
+Source = '[*]Source: ' + src
+Result = '[*]Result: ' + tgt
+ls.append(Source)
+ls.append(Result)
+for value in range(1, len(smartResult)):
+    if value == 1:
+        ls.append('[*]SmartResult:')
+    ls.append("[%d] --> %s" % (value, smartResult[value]))
+
+
+for value in ls:
+    print u'%s' % value
+    if fp:
+        fp.write(value + '\n')
+
+if fp:
+    fp.write('\n')
+    fp.close()
