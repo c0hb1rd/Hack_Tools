@@ -68,7 +68,6 @@ result =  response.read()
 result = result.lstrip()
 
 defaultResult = json.loads(result)['translateResult'][0][0]
-smartResult = json.loads(result)['smartResult']['entries']
 src = defaultResult['src']
 tgt = defaultResult['tgt']
 
@@ -77,11 +76,15 @@ Source = '[*]Source: ' + src
 Result = '[*]Result: ' + tgt
 ls.append(Source)
 ls.append(Result)
-for value in range(1, len(smartResult)):
-    if value == 1:
-        ls.append('[*]SmartResult:')
-    ls.append("[%d] --> %s" % (value, smartResult[value]))
 
+try:
+    smartResult = json.loads(result)['smartResult']['entries']
+    for value in range(1, len(smartResult)):
+        if value == 1:
+            ls.append('[*]SmartResult:')
+        ls.append("[%d] --> %s" % (value, smartResult[value]))
+except:
+    pass
 
 for value in ls:
     print u'%s' % value
