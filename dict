@@ -8,7 +8,7 @@ sys.setdefaultencoding('utf-8')
 
 
 def version():
-    return 'version 0.0.1'
+    return 'version 0.0.2'
 
 def help():
         print 'Description: dict is a translate tool.'
@@ -34,6 +34,9 @@ if len(sys.argv) > 1:
         for value in sys.argv[2:]:
             fp = open("offlineDict.txt", 'at')
             src += value + ' '
+    elif sys.argv[1] == '-v':
+        print version()
+        exit()
     elif sys.argv[1][0] == '-':
         usag()
         exit()
