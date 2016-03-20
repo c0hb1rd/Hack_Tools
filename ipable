@@ -1,6 +1,6 @@
 #!/bin/bash
-echo -n "[*] Input the range(xx.xx.nn.xx):"
+echo -n "[*] Input the range(xx.xx.xx.xx-xx):"
 read range
 echo "[*] Now waitng..."
-nmap -sn 172.30.$range.1-254 | grep -o --color=always "1.*\..*\..*\..*"
+nmap -sn $range | grep -o --color=always "1.*\..*\..*\..*"
 echo -e "[*] The end."
