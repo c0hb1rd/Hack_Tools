@@ -4,22 +4,22 @@ from os import system
 import threading
 
 ip_range = str(raw_input('[*]Input the IP range(xx.xx.xx.xx-xx):'))
-cmd = 'nmap -sn %s | grep -o "%s.*\..*\..*\..*" > result.txt' % (ip_range, ip_range[0])
+cmd = 'nmap -sn %s | grep -o "%s.*\..*\..*\..*" > result.txt' % (
+    ip_range, ip_range[0])
 system(cmd)
 fp = open('result.txt', 'r+')
-list = fp.readlines()
+lt = fp.readlines()
 fp.close()
 
-print '[*] Total host:%d' % len(list)
+print '[*] Total host:%d' % len(lt)
+
 
 def scan(line):
     print '[*]Scanning ' + line[:-1]
     cmd = 'nmap ' + line[0:-1] + ' >> ip_info.txt && echo '' >> ip_info.txt'
     system(cmd)
-    print '[*]Complete '+ line[:-1]
+    print '[*]Complete ' + line[:-1]
 
-for line in list:
+for line in lt:
     thread = threading.Thread(target=scan, args=(line,))
     thread.start()
-
-
