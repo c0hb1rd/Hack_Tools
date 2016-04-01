@@ -1,0 +1,19 @@
+#!/usr/bin/env python
+# coding=utf-8
+import sys
+from subprocess import check_output as cmd
+
+
+reload(sys)
+sys.setdefaultencoding("utf-8")
+
+COMMAND_ADD = 'git add %s' % sys.argv[1]
+COMMAND_CMT = 'git commit -m "%s"' % sys.argv[2]
+
+cmd(COMMAND_ADD, shell=True)
+cmd(COMMAND_CMT, shell=True)
+
+print '[*]Add file or directory:', sys.argv[1]
+print '[*]Commit message:', sys.argv[2]
+print '[->]Pushing...'
+print cmd('git push origin master', shell=True) + '[*]Done'
