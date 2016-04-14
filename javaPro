@@ -10,6 +10,9 @@ PRO_SRC_MAIN_RESOURCES = "mkdir " + sys.argv[1] + "/src/main/resources"
 PRO_SRC_TEST = "mkdir " + sys.argv[1] + "/src/test"
 PRO_SRC_TEST_JAVA = "mkdir " + sys.argv[1] + "/src/test/java"
 PRO_SRC_TEST_RESOURCES = "mkdir " + sys.argv[1] + "/src/test/resources"
+PRO_JAR = "mkdir " + sys.argv[1] + "/jar"
+PRO_JAR_BIN = "mkdir " + sys.argv[1] + "/jar/bin"
+PRO_JAR_MANIFEST = "mkdir " + sys.argv[1] + "/jar/manifest"
 
 PRO_TARGET = "mkdir " + sys.argv[1] + "/target"
 PRO_TARGET_CLASSES = "mkdir " + sys.argv[1] + "/target/classes"
@@ -24,7 +27,10 @@ cmdList = [
     PRO_SRC_MAIN_RESOURCES,
     PRO_SRC_TEST_RESOURCES,
     PRO_TARGET,
-    PRO_TARGET_CLASSES
+    PRO_TARGET_CLASSES,
+    PRO_JAR,
+    PRO_JAR_BIN,
+    PRO_JAR_MANIFEST
 ]
 
 for value in cmdList:
