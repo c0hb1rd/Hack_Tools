@@ -1,0 +1,31 @@
+#!/usr/bin/env python
+# coding=utf-8
+import sys
+from os import system as cmd
+PRO = "mkdir " + sys.argv[1]
+PRO_SRC = "mkdir " + sys.argv[1] + "/src"
+PRO_SRC_MAIN = "mkdir " + sys.argv[1] + "/src/main"
+PRO_SRC_MAIN_JAVA = "mkdir " + sys.argv[1] + "/src/main/java"
+PRO_SRC_MAIN_RESOURCES = "mkdir " + sys.argv[1] + "/src/main/resources"
+PRO_SRC_TEST = "mkdir " + sys.argv[1] + "/src/test"
+PRO_SRC_TEST_JAVA = "mkdir " + sys.argv[1] + "/src/test/java"
+PRO_SRC_TEST_RESOURCES = "mkdir " + sys.argv[1] + "/src/test/resources"
+
+PRO_TARGET = "mkdir " + sys.argv[1] + "/target"
+PRO_TARGET_CLASSES = "mkdir " + sys.argv[1] + "/target/classes"
+
+cmdList = [
+    PRO,
+    PRO_SRC,
+    PRO_SRC_MAIN,
+    PRO_SRC_TEST,
+    PRO_SRC_MAIN_JAVA,
+    PRO_SRC_TEST_JAVA,
+    PRO_SRC_MAIN_RESOURCES,
+    PRO_SRC_TEST_RESOURCES,
+    PRO_TARGET,
+    PRO_TARGET_CLASSES
+]
+
+for value in cmdList:
+    cmd(value)
