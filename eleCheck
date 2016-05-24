@@ -1,0 +1,34 @@
+#!/usr/bin/env python
+# coding=utf-8
+import requests as r
+import re
+
+
+class EleCheck:
+    def __init__(self, room):
+        self.url = 'http://192.168.35.104:99/mainn.asp?key=' + room + '&otype=msg&Submit2=%CB%D1%CB%F7'
+        self.pattern = '<td height="5">(.{1,6})</td>'
+        self.response = ''
+        self.dataName = ['编号', '集中器编号', '用户名', '用户编号', '总用电量', '余电', '用户地址']
+
+    def getResponse(self):
+        self.response = r.get(self.url)
+        return self.response.content
+
+    def setPattern(self, pattern):
+        self.pattern = pattern
+
+    def showContent(self):
+        result = re.findall(self.pattern, self.response.content)
+        index = 0
+        for line in result:
+            print '[*]' + self.dataName[index] + ':' + line
+            index += 1
+
+
+id = str(raw_input('[*]Room:'))
+eleCheck = EleCheck(id)
+eleCheck.getResponse()
+eleCheck.showContent()
+
+    

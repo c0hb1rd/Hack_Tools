@@ -1,0 +1,2 @@
+#!/bin/bash
+scp root@121.42.32.213:/var/www/SwapSpace/$1 .

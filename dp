@@ -1,0 +1,26 @@
+#!/usr/bin/env python
+# coding=utf-8
+import urllib
+import threading
+
+def down(i, j):
+    print '[*]Downloading NO.%d...' % i 
+    url = ''
+    if i < 10:
+        url = 'http://web2.cartoonmad.com/c86es736z62/1221/0%d/00%d.jpg' % (j, i)
+    else:
+        url = 'http://web2.cartoonmad.com/c86es736z62/1221/0%d/0%d.jpg' % (j, i)
+    urllib.urlretrieve(url, '%d/%d.jpg' % (j, i))
+    print '[*]Downloaded NO.%d.' % i
+
+charater = int(raw_input('[*]Input charater:'))
+index = int(raw_input('[*]Input a start index:'))
+max = int(raw_input('[*]Input a max index:'))
+while True:
+    thread = threading.Thread(target=down, args=(index, charater))
+    thread.start()
+    index += 1
+    if index > max:
+        break
+        print '[*]Complete.'
+
