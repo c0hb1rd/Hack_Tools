@@ -1,0 +1,54 @@
+#!/usr/bin/env python
+# coding=utf-8
+import requests as r
+import re as Re
+
+
+class HTTPDebugClient(object):
+    def __init__(self):
+        self.url = ''
+        self.data = ''
+        self.headers = ''
+        self.response = ''
+        self.result = []
+        self.pattern = ''
+
+    def connect(self, url, method, headers='', data=''):
+        self.url = url
+        self.headers = headers
+        self.data = data
+        if method == 'GET':
+            self.response = r.get(url, headers=headers, data=data)
+            return True
+        elif method == 'POST':
+            self.response = r.post(url, headers=headers, data=data)
+            return True
+        else:
+            return False
+    
+    def setPattern(self, pattern):
+        self.pattern = pattern
+
+    def getContent(self):
+        return self.response.text
+
+    def showRegContent(self):
+        self.result = Re.findall(self.pattern, self.getContent())
+        i = 1
+        for line in self.result:
+            if i == 1:
+                print line
+            elif i == 2:
+                print line
+            i += 1
+
+if __name__ == '__main__':
+    import sys
+    id = sys.argv[1]
+    myClient = HTTPDebugClient()
+    if myClient.connect('http://music.163.com/mv?id=' + id, 'GET', {'Cookie':'NETEASE_WDA_UID=64129999#|#1429269391631; _ntes_nuid=2ab2253d764dd3bbb502d4f177b2eef3; _ntes_nnid=cde369e2b465892b38f84d87cae786a7,1453181644221; vjuids=11974ecfd.15258603713.0.f464c4ab; usertrack=ZUcIhVaqIE1i1HBkA4K5Ag==; __gads=ID=065c06e22a48a366:T=1457606806:S=ALNI_MaEzyPm4PFOgRxSkZeW7lCvUvdDLQ; _ga=GA1.2.323153993.1458452079; vinfo_n_f_l_n3=1a810c733b32e466.1.7.1453181646634.1458916446570.1462230100492; Province=020; City=07647; vjlast=1453181647.1464443612.11; NTESmusic_yyrSI=DA01F3442AEF4B50DCA9204C8B8A191C.classa-music-yyr1.server.163.org-8010; JSESSIONID-WYYY=e023ed23b83873c988d98edefe653ae94233c7b500b83b5968f6e6daff9efb8a527ffeda949cc47df9ad8759753fcb8a063888d80694d6e129047bf1c8e8e754d00f5b2e0b0f22521462a6f14d393420890944daf1e6041b0cf403b5020c4f0a8f6d854e85ee6028b0508604c374e6640d8135e5cc99e37fb0cc2496e800088707ef14a4%3A1464681819147; _iuqxldmzr_=25; playerid=59426330; MUSIC_U=398371dec9968f721caccf6d4adff2d9e8502d4ca81348cb67adbe8792ea1558b9e1af65f67ead4163b9c73413a1bb6baf9e62a8590fd08a; __csrf=a4820a5a36d0a0e74ea166c057d0ea2a; __remember_me=true; __utma=94650624.244859890.1452508598.1464677183.1464681477.331; __utmb=94650624.3.10.1464681477; __utmc=94650624; __utmz=94650624.1453215463.30.3.utmcsr=itechzero.com|utmccn=(referral)|utmcmd=referral|utmcct=/google-mirror-sites-collect.html'}):
+        myClient.setPattern('(http://v4.music.126.net/\w*/\w*/\w*/\w*/\w*==/\w*/\d*/\w*.mp4)')
+        myClient.showRegContent()
+        #print myClient.getContent()
+
+
