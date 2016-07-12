@@ -90,7 +90,7 @@ except:
     pass
 
 for value in ls:
-    print u'%s' % value
+    print value
     if fp:
         fp.write(value + '\n')
 
