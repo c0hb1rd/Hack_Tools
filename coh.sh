@@ -1,2 +1,2 @@
 #!/bin/bash
-mysql -uroot -phackingme?233333
+mysql -uroot -phackingme?233333+1s

