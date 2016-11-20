@@ -1,0 +1,44 @@
+#!/usr/bin/env python
+# encoding: utf-8
+import sys
+
+
+STR = 'AsEbasdkljt123ASsasadflASJKBFSOQKLGjkhdfmnzxcAIOHfdsjk1238DFjasdhkASFDkdsaflqAPoiDFmnzxccvAwjkqbwesdfhokqweoibxscqAWKJhjdskfjsakdfqweAWDJbdskfpoxcvvmnqQWEiohfasnadskuyXCMNBAWeiuqdbasbdzgqQOAspdofdsjkfbhqwhqjwkegASDmkbfkajsgcaqwlkqheASDASFNmbnzxcqweqpo1i238y8xcaklj10nfdjuagshdfojacbnugaqwr1205jmncaga'
+
+
+def help():
+    print '''Usage:
+    -c  --create <num>
+                Create a strings which length is num
+    -o  --offset <hex>
+                Show hex position
+    -h  --help  Print this help document'''
+
+
+def create(arg):
+    print '[*]Construct a string which length of %s' % arg
+    print STR[:int(arg)]
+
+
+def offset(arg):
+
+    addr = arg[2:]
+    r_addr = addr[6:].decode('hex') + addr[4:6].decode('hex') + addr[2:4].decode('hex') + addr[:2].decode('hex')
+    print '[*]Convert %s to string:' % arg, r_addr
+    print '[*]Position: ', STR.find(r_addr)
+
+
+
+if len(sys.argv) < 3:
+    help()
+    exit()
+
+
+if sys.argv[1] == '--create' or sys.argv[1] == '-c':
+    create(sys.argv[2])
+elif sys.argv[1] == '--offset' or sys.argv[1] == '-o':
+    offset(sys.argv[2])
+elif sys.argv[1] == '-h' or sys.argv[1] == '--help':
+    help()
+else:
+    print 'Use pattern.py -h to show help document'
