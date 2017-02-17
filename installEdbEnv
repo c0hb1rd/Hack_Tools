@@ -1,2 +1,2 @@
 #!/bin/sh
-sudo apt-get install qt5-default libboost-dev libcapstone-dev libgraphviz-dev
+sudo apt-get install -y qt5-default libboost-dev libcapstone-dev libgraphviz-dev libqt5xmlpatterns5-dev libqt5svg5-dev 
