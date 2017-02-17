@@ -1,0 +1,2 @@
+#!/bin/sh
+python$1 -m pip install -U $2 -i http://mirrors.aliyun.com/pypi/simple/ --trusted-host mirrors.aliyun.com
